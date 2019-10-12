@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tech Test</title>
+    <script language ="javascript" type = "text/javascript" >
+        function submitform() {
+<!--            var url = '/app/createPerson';-->
+<!--            $('#person').attr('action', url);-->
+<!--            var data = JSON.stringify({-->
+<!--                "name": $('#name').val(),-->
+<!--                "age": $('#age').val(),-->
+<!--                "balance": $('#balance').val(),-->
+<!--                "email": $('#email').val(),-->
+<!--                "address": $('#address').val()-->
+<!--            })-->
+<!--            $('<input type="hidden" name="json"/>').val(data).appendTo('#person');-->
+<!--            $("#person").submit();-->
+            alert("Not Implemented Yet");
+            return false;
+        }
+    </script>
+    <script language ="javascript" type = "text/javascript" >
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/app/people", true);
+
+        xhr.onload = function () {
+            var data = JSON.parse(this.response)
+
+            if (xhr.status >= 200 && xhr.status < 400) {
+                var records = "<tr><th>ID</th><th>Name</th><th>Age</th><th>Balance</th><th>Email</th><th>Address</th></tr>";
+                data.forEach(person => {
+                    records += "<tr><td>" + person.id + "</td><td>" + person.name + "</td><td>" +
+                    person.age + "</td><td>" + person.balance + "</td><td>" + person.email +
+                    "</td><td>" + person.address + "</td></tr>";
+                    console.log(person.name + ", " + person.age + ", " +
+                        person.balance + ", " + person.email + ", " + person.address)
+                })
+                document.getElementById("people").innerHTML = records;
+            } else {
+                console.log('error')
+            }
+        };
+
+        xhr.send();
+    </script>
+    <style>
+        table, th, td { border: 1px solid black; padding: 2px; }
+    </style>
+</head>
+<body>
+    <h1>Flexera Tech Test Home Page</h1>
+    <p>Just a very simple browser front end to handle the basic GET, POST and DELETE requests.</p>
+    <br/>
+    <div>
+        <!-- Display all the entries in the data store when the page loads -->
+        <table width="60%">
+            <tbody id="people"></tbody>
+        </table>
+    </div>
+    <br/>
+    <br/>
+    <div>
+<!--        <form id="person" method="POST">-->
+        <form id="person">
+            <table>
+                <tr><td>Name:</td><td><input type="text" name="name"></td></tr>
+                <tr><td>Age:</td><td><input type="text" name="age"></td></tr>
+                <tr><td>Balance:</td><td><input type="text" name="balance"></td></tr>
+                <tr><td>Email:</td><td><input type="text" name="email"></td></tr>
+                <tr><td>Address:</td><td><input type="text" name="address"></td></tr>
+            </table>
+            <br/>
+            <input type="submit" value="Submit" onClick="submitform()">
+        </form>
+    </div>
+</body>
+</html>
