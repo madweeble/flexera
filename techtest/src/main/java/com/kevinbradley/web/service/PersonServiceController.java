@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/app")
+@RequestMapping(value = "/app/people")
 public class PersonServiceController {
 
     @Autowired
@@ -20,7 +20,7 @@ public class PersonServiceController {
      *
      * @return all PersonEntity records in the data store
      */
-    @GetMapping(value = "/people", produces = "application/json")
+    @GetMapping(produces = "application/json")
     public List<PersonEntity> getPeople(@RequestParam(value = "sortBy", required = false)String sortBy) {
         return this.personService.getPeople(sortBy);
     }
@@ -31,7 +31,7 @@ public class PersonServiceController {
      * @param name the person we want to get information for
      * @return all fields for the specified name
      */
-    @GetMapping(value = "/people/{name}", produces = "application/json")
+    @GetMapping(value = "/{name}", produces = "application/json")
     public List<PersonEntity> getPersonByName(@PathVariable(value = "name")String name) {
         return this.personService.getPeopleByName(name);
     }
@@ -42,7 +42,7 @@ public class PersonServiceController {
      * @param personEntity the person to create in json format
      * @return the data for this person, provided the object was successfully persisted to the data store
      */
-    @PostMapping(value = "/createPerson", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
     public List<PersonEntity> createPerson(@RequestBody PersonEntity personEntity) {
         return this.personService.createPerson(personEntity);
     }
@@ -54,7 +54,7 @@ public class PersonServiceController {
      * @return the number of people deleted by this operation
      */
     @Transactional
-    @DeleteMapping(value = "/deletePerson/{name}")
+    @DeleteMapping(value = "/delete/{name}")
     public long deletePerson(@PathVariable(value = "name")String name) {
         return this.personService.deletePerson(name);
     }

@@ -5,7 +5,7 @@
     <title>Tech Test</title>
     <script language ="javascript" type = "text/javascript" >
         function submitform() {
-<!--            var url = '/app/createPerson';-->
+<!--            var url = '/app/people/create';-->
 <!--            $('#person').attr('action', url);-->
 <!--            var data = JSON.stringify({-->
 <!--                "name": $('#name').val(),-->
@@ -44,8 +44,18 @@
 
         xhr.send();
     </script>
+    <script language ="javascript" type = "text/javascript">
+        function deletePerson() {
+            var url = '/app/people/delete';
+            var name = document.getElementById("deleteMe").value;
+            return fetch(url + '/' + name, {
+                method: 'DELETE'
+            })
+        }
+    </script>
     <style>
         table, th, td { border: 1px solid black; padding: 2px; }
+        button { width: 100px; padding: 10px; border-radius: 10px; margin:10px; }
     </style>
 </head>
 <body>
@@ -58,8 +68,7 @@
             <tbody id="people"></tbody>
         </table>
     </div>
-    <br/>
-    <br/>
+    <br/><hr/><br/>
     <div>
 <!--        <form id="person" method="POST">-->
         <form id="person">
@@ -71,8 +80,16 @@
                 <tr><td>Address:</td><td><input type="text" name="address"></td></tr>
             </table>
             <br/>
-            <input type="submit" value="Submit" onClick="submitform()">
+            <button onClick="submitform()" type="submit">Create</button>
         </form>
+    </div>
+    <br/><hr/><br/>
+    <div>
+        <table>
+            <tr><td>Name:</td><td><input id="deleteMe" type="text" name="name"></td></tr>
+        </table>
+        <br/>
+        <button onclick="deletePerson()" >Delete</button>
     </div>
 </body>
 </html>
