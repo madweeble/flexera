@@ -38,7 +38,8 @@ will return a list of all people in the database.  Whereas,
 will return a list of people with the name "Steve Rogers" only.
 
 The **.../create** method will take a JSON formatted string and add that person to the database.
-Duplicate *names* are allowed, but if the person record already exists, a duplicate will not be added.
+Duplicate *names* are allowed, provided at least one other field is unique.  If a record matching *all*
+fields already exists, a duplicate will not be added.
 
 The **.../delete/{name}** method takes a single name and deletes that person from the database.
 
@@ -52,4 +53,6 @@ I have written the REST API in Java using SpringBoot.  I have added some enhance
 
 Initially I developed and tested the project using the in-memory **h2** database.  Using the Spring
  framework, this can be easily switched to a production database.  Once most of the work was complete, I
-  created a MySQL database locally and added the properties to the application.properties file to test.
+  created a MySQL database locally and added the properties to the application.properties file to finish
+  testing.  To switch between data sources, comment out the jdbc properties for h2, or comment in (and 
+  modify as needed) to use MySQL or another database.
