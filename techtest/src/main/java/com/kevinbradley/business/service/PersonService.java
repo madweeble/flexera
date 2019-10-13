@@ -57,7 +57,7 @@ public class PersonService {
      * @param person the new person to add
      * @return the new person in the data store
      */
-    public List<PersonEntity> createPerson(PersonEntity person) {
+    public List<PersonEntity> addPerson(PersonEntity person) {
         List<PersonEntity> people = personRepository.findByNameIgnoreCase(person.getName());
         boolean matchFound = people.stream().anyMatch( p -> p.toString().equalsIgnoreCase(person.toString()));
         if (!matchFound) {
@@ -79,6 +79,12 @@ public class PersonService {
     // ===========================================================
     // ===========================================================
 
+    /**
+     * Sort the list of people if a sort parameter is specified
+     *
+     * @param sortBy the sort field
+     * @param people a {@link PersonEntity} list
+     */
     private void sortRecords(final String sortBy, List<PersonEntity> people) {
         if (sortBy != null && sortBy.length() > 0) {
             Comparator comparator = null;

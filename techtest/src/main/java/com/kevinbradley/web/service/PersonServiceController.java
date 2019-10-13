@@ -37,14 +37,14 @@ public class PersonServiceController {
     }
 
     /**
-     * Handle the request to create a new {@link PersonEntity}
+     * Handle the request to add a new {@link PersonEntity}
      *
-     * @param personEntity the person to create in json format
+     * @param personEntity the person to add in json format
      * @return the data for this person, provided the object was successfully persisted to the data store
      */
-    @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
-    public List<PersonEntity> createPerson(@RequestBody PersonEntity personEntity) {
-        return this.personService.createPerson(personEntity);
+    @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
+    public List<PersonEntity> addPerson(@RequestBody PersonEntity personEntity) {
+        return this.personService.addPerson(personEntity);
     }
 
     /**
